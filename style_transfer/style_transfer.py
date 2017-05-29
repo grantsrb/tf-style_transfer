@@ -18,7 +18,8 @@ try:
     styleweights = [float(x) for x in styleweights]
     img_weight = float(sys.argv[5])
     style_weight = float(sys.argv[6])
-    save_path = str(sys.argv[7])
+    n_iterations = int(sys.argv[7])
+    save_path = str(sys.argv[8])
 except IndexError:
     img_path = input("Image path: ")
     style_path = input("Style path: ")
@@ -27,6 +28,7 @@ except IndexError:
     styleweights = [float(x) for x in styleweights]
     img_weight = float(input("Image cost weight: "))
     style_weight = float(input("Style cost weight: "))
+    n_iterations = int(input('Number of iterations: '))
     save_path = input("Save name: ")
 
 img_size = (224,224)
@@ -115,12 +117,12 @@ combined_grads = tf.gradients(combined_loss, tfimg)
 
 with tf.Session() as sess:
     evaluator = Evaluator(loss_grads, [1]+[s for s in gen_img.shape], sess)
-    combined_img = solve_image(evaluator, 30,
+    combined_img = solve_image(evaluator, n_iterations,
                             np.reshape(gen_img, [1]+[s for s in gen_img.shape]))
 
 combined_img = combined_img.reshape(gen_img.shape)
 save_img = Image.fromarray((combined_img*255).astype(np.uint8))
-save_img.save(save_path+'.jpg')
+save_img.save(save_path)
 
 plt.imshow((combined_img*255).astype(np.uint8))
 plt.show()
@@ -131,7 +133,7 @@ outimg[:,outimg.shape[1]//3:2*outimg.shape[1]//3,:] = combined_img[:,:,:]
 outimg[:,2*outimg.shape[1]//3:,:] = style[:,:,:]
 
 save_img = Image.fromarray((outimg*255).astype(np.uint8))
-save_img.save(save_path+'_combined.jpg')
+save_img.save(save_path[:-4]+'_combined.jpg')
 
 
 #
