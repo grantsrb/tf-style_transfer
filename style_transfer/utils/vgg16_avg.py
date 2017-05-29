@@ -122,7 +122,14 @@ class Vgg16:
     def get_fc_weight(self, name):
         return tf.constant(self.data_dict[name][0], name="weights")
 
-    def run_convs(self, rgb, layer_i=5):
+    def run_convs(self, rgb, conv_layer=4.1):
+        # Load images scaled from 0-1 with RGB channels last.
+
+        # rgb - 4 dimensional tensor of images with image rows in axis 1, image cols
+        #        in axis 2, and image color channels in axis 3
+        # conv_layer - float denoting which convolutional layer to output
+
+
         rgb_scaled = rgb * 255.0
 
         # Convert RGB to BGR
@@ -134,59 +141,59 @@ class Vgg16:
         ])
 
         conv1_1 = self.conv_layer(bgr, "conv1_1")
-        if layer_i <= 1.1:
+        if conv_layer <= 1.1:
             return conv1_1
         conv1_2 = self.conv_layer(conv1_1, "conv1_2")
-        if layer_i <= 1.2:
+        if conv_layer <= 1.2:
             return conv1_2
         pool1 = self.avg_pool(conv1_2, 'pool1')
-        if layer_i <= 2:
+        if conv_layer <= 2:
             return pool1
 
         conv2_1 = self.conv_layer(pool1, "conv2_1")
-        if layer_i <= 2.1:
+        if conv_layer <= 2.1:
             return conv2_1
         conv2_2 = self.conv_layer(conv2_1, "conv2_2")
-        if layer_i <= 2.2:
+        if conv_layer <= 2.2:
             return conv2_2
         pool2 = self.avg_pool(conv2_2, 'pool2')
-        if layer_i <= 3:
+        if conv_layer <= 3:
             return pool2
 
         conv3_1 = self.conv_layer(pool2, "conv3_1")
-        if layer_i <= 3.1:
+        if conv_layer <= 3.1:
             return conv3_1
         conv3_2 = self.conv_layer(conv3_1, "conv3_2")
-        if layer_i <= 3.2:
+        if conv_layer <= 3.2:
             return conv3_2
         conv3_3 = self.conv_layer(conv3_2, "conv3_3")
-        if layer_i <= 3.3:
+        if conv_layer <= 3.3:
             return conv3_3
         pool3 = self.avg_pool(conv3_3, 'pool3')
-        if layer_i <= 4:
+        if conv_layer <= 4:
             return pool3
 
         conv4_1 = self.conv_layer(pool3, "conv4_1")
-        if layer_i <= 4.1:
+        if conv_layer <= 4.1:
             return conv4_1
         conv4_2 = self.conv_layer(conv4_1, "conv4_2")
-        if layer_i <= 4.2:
+        if conv_layer <= 4.2:
             return conv4_2
         conv4_3 = self.conv_layer(conv4_2, "conv4_3")
-        if layer_i <= 4.3:
+        if conv_layer <= 4.3:
             return conv4_3
         pool4 = self.avg_pool(conv4_3, 'pool4')
-        if layer_i <= 5:
+        if conv_layer <= 5:
             return pool4
 
         conv5_1 = self.conv_layer(pool4, "conv5_1")
-        if layer_i <= 5.1:
+        if conv_layer <= 5.1:
             return conv5_1
         conv5_2 = self.conv_layer(conv5_1, "conv5_2")
-        if layer_i <= 5.2:
+        if conv_layer <= 5.2:
             return conv5_2
         conv5_3 = self.conv_layer(conv5_2, "conv5_3")
-        if layer_i <= 5.3:
+        if conv_layer <= 5.3:
             return conv5_3
         pool5 = self.avg_pool(conv5_3, 'pool5')
         return pool5
