@@ -1,7 +1,0 @@
-*.jpg
-weights/*
-*.npy
-__pycache__
-/.ipynb_checkpoints
-*.mp4
-checkpoint
