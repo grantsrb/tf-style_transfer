@@ -50,7 +50,7 @@ except:
     if styleweights == '':
         styleweights = [0.,.5,1.,1.]
     else:
-        styleweights = [float(x) for x in styleweights]
+        styleweights = [float(x) for x in styleweights.split(',')]
     img_weight = input("Image cost weight [1]: ")
     if img_weight == '':
         img_weight = 1.
@@ -69,6 +69,8 @@ except:
     save_path = input("Save name [combined.jpg]: ")
     if save_path == '':
         save_path = 'combined.jpg'
+
+    img_size = (img_w, img_h)
 
 
 def loss_grads(gen_img, sess):
