@@ -8,7 +8,9 @@ This notebook serves as a walk through of a TensorFlow implementation of style t
 
 Style transfer is the process of blending the style of a image with the form of another image. For example the left and right images are style transferred to generate the middle image.
 
-![image1](./imgs/abbas_starry_blend.jpg)
+![image1](./imgs/satch_gogh_combined.jpg)
+![image2](./imgs/abbas_starry_blend.jpg)
+![image3](./imgs/benj_picasso_combined.jpg)
 
 ## Project Navigation
 
