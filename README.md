@@ -14,7 +14,16 @@ Style transfer is the process of blending the style of a image with the form of 
 
 ## Project Navigation
 
-Launch or view the [style_transfer](./style_transfer.ipynb) notebook for a project walk through that discusses the concepts and code.
+Launch the [style_transfer](./style_transfer.ipynb) notebook or view the [style_transfer.html](./style_transfer.html) file for a project walk through that discusses the concepts and code.
+
+To launch the notebook, first install the system requirements (listed in the next section). Next, open terminal and clone this repository. Then navigate to the project folder:
+
+```
+$ git clone https://github.com/grantsrb/Image_Style_Transfer
+$ cd Image_Style_Transfer
+```
+
+Next, type these commands in the command line:
 
 ```
 $ jupyter notebook style_transfer.ipynb
